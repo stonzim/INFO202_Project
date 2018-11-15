@@ -1,0 +1,85 @@
+@startuml
+
+' style tweaks to make the diagram a little more readable
+skinparam {
+	Style strictuml
+	RoundCorner 8
+
+	Sequence {
+		' make activations yellow too
+		LifeLineBackgroundColor #FDFDCD
+
+		' make stereotypes less ugly
+		Stereotype {
+			Font {
+				Size 11
+				Style plain
+			}
+		}
+	}
+
+	DatabaseBorderColor #A80036
+
+}
+
+title Category Filter 
+
+actor User as user
+participant "Main" as main << main >>
+participant "MainMenu" as menu << frame >>
+participant "ProductReportDialog" as report << dialog >>
+participant "ProductDatabaseDAO" as dao << DAO >>
+database "Database" as db
+participant "SimpleListModel\n:model" as model
+participant "Product\n:product" as product << domain >>
+
+
+create menu
+main -> menu : « create »
+
+user -> menu : clicks 'View Products'
+activate menu
+
+create report
+menu -> report : « create »
+
+activate report
+create dao
+report -> dao: « create »
+
+
+note over report: as shown in\n'View Products'\ndiagram
+user <-- report-- : list of products\ndisplayed
+
+user -> report++ : user clicks "Category Filter"\ndropdown; clicks on a category
+
+report -> dao++ : filter(category)
+
+dao -> db++ : searched products by category
+return resultSet 
+
+dao -> dao : extract details of product\nof this category from ResultSet\ninto variables
+
+create product
+dao -> product : « construct »
+
+dao -> product++ : set products fields\nfrom variables
+product--
+
+note over dao: note:the last three actions\nare done in a while loop: get\nDB info into variables-then\nconstruct product with these\ndata as fields for each product\nin ResultSet
+
+create model
+report -> model : « construct »
+
+
+report -> model++ : updateItems(products)
+model--
+
+report -> report : jList.setModel(model)
+
+user <-- report : product displayed 
+
+@enduml
+
+
+

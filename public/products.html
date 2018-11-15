@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="ShoppingApp">
+    <head>
+        <title>View Products</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src="js/ngStorage.min.js"></script>
+        <script src="js/shopping.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body  ng-controller="ProductController as prodCtrl">
+        <nav>
+            <div ng-include="'menu.html'" ></div>
+        </nav>
+        <header>
+            <h1>Products</h1>
+        </header>
+        <section id="categories">
+            <h3>Filter by Category</h3>
+            <a href="#" type="button" ng-click="prodCtrl.selectAll()" class="catButton">All</a>
+            <a href="#" ng-repeat="cat in prodCtrl.categories" ng-click="prodCtrl.selectCategory(cat)" class="catButton">{{cat}}</a>
+        </section>
+        <table ng-controller="CartController as cartCtrl" id="productsTable">
+            <tr>
+              <th>Name</th>
+              <th>Description</th> 
+              <th>Price</th>
+              <th>Available</th>
+              <th></th>
+            </tr>
+            <tr ng-repeat="product in prodCtrl.products">
+                <td>{{product.name}}</td> 
+                <td>{{product.description}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.quantityInStock}}</td>   
+                <td><button type="button" ng-click="cartCtrl.productSelect(product)">Buy</button></td>
+            </tr>         
+      </table>
+        <footer>
+            <p>
+                This website is not a real business. This page is only to fulfill the requirements for an assignment only.
+            </p>
+        </footer>
+    </body>
+</html>

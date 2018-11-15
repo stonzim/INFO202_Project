@@ -1,0 +1,39 @@
+@startuml
+skinparam style strictuml
+
+actor "User" as user
+participant "Administration" as main <<main>>
+main++
+
+create "MainMenu" as menu <<frame>>
+main -> menu : construct
+
+user -> menu++ : clicks 'Add a New Product'
+create "DataEntryDialog" as dialog <<dialog>>
+menu -> dialog : construct
+dialog++
+
+create "ListProducts" as dao <<DAO>>
+dialog -> dao : construct
+dialog--
+
+user -> dialog++ : enters product details
+dialog--
+
+user -> dialog++ : clicks 'Save' button
+dialog -> dialog : get product details
+
+dialog -> dao++ : add categoroy to comboBox
+dao--
+
+create "Product" as product <<domain>> 
+dialog -> product : construct(product details)
+product--
+
+dialog -> dao++ : add product to list
+dao--
+
+user -> dialog : clicks 'Cancel' button
+dialog -> dialog : dispose()
+destroy dialog
+@enduml

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="ShoppingApp">
+    <head>
+        <title>Quantity</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src="js/ngStorage.min.js"></script>
+        <script src="js/shopping.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body ng-controller="CartController as cartCtrl">
+        <div>
+            <nav>
+                <div ng-include="'menu.html'" ></div>
+            </nav>
+        </div>
+        <header>
+            <h1>How many do you want to buy?</h1>
+        </header>
+        <table id="quantityTable">
+            <tr>
+                <th>ID:</th>
+                <td>{{cartCtrl.selectedProduct.productID}}</td> 
+            </tr>
+            <tr>
+                <th>Name:</th>
+                <td>{{cartCtrl.selectedProduct.name}}</td>
+            </tr>
+            <tr>
+                <th>Description:</th> 
+                <td>{{cartCtrl.selectedProduct.description}}</td>
+            </tr>
+            <tr>
+                <th>Price:</th>
+                <td>{{cartCtrl.selectedProduct.price}}</td>
+            </tr>
+            <tr>
+                <th>Quantity:</th> 
+                <td>{{cartCtrl.selectedProduct.quantityInStock}}</td>
+            </tr>
+        </table>
+        <form id="quantityForm">
+            <fieldset>
+                <legend>Quantity to buy</legend>
+                <p>
+                    <label>How many?</label>
+                    <input type="text" ng-model="quantity" required>
+                    <button type="button" ng-click="cartCtrl.addToCart(quantity)">Add to Cart</button>
+                </p>
+            </fieldset>
+        </form>
+        <footer>
+            <p>
+                This website is not a real hotel. This page is only to fulfill the requirements for an assignment only.
+            </p>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="ShoppingApp">
+    <head>
+        <title>Welcome</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src="js/ngStorage.min.js"></script>
+        <script src="js/shopping.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+            <nav>
+                <div ng-include="'menu.html'" ></div>              
+            </nav>
+        <header>
+            <h1>Welcome to Winnie's Shop</h1>
+        </header>
+        <h3>
+            Proudly supplying people with stuff for 1,375 years.
+        </h3>
+        <hr>
+        <div id="left">
+            <p><span>Here at Winnie's, we will literally sell you anything, from pancakes stapled to rabbits, the tears of vegans, through to kitten whiskers, anything.</span></p>
+        </div>
+        <div id="right">
+            <img src="../images/rabbit1.jpg" alt="Adorable bunny with stylish pancake hat" width="600">
+        </div>
+        <footer>
+            <p>
+                This website is not a real hotel. This page is only to fulfill the requirements for an assignment only.
+            </p>
+        </footer>
+    </body>
+</html>

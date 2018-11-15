@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="ShoppingApp">
+    <head>
+        <title>Sign Up</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src="js/ngStorage.min.js"></script>
+        <script src="js/shopping.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+        <div>
+            <nav>
+                <div ng-include="'menu.html'" ></div>
+            </nav>
+        </div>
+        <header>
+            <h1>Create an Account</h1>
+        </header>
+            <form ng-controller="CustomerController as custCtrl" ng-submit="custCtrl.registerCustomer(customer)">
+                <fieldset id="signUp">
+                    <legend>Account Details</legend>                 
+                    <p>
+                        <label>User Name:</label>
+                        <input class="r" type="text" ng-model="customer.username" required>
+                    </p>
+                    <p>
+                        <label>First Name:</label>
+                        <input class="r" type="text" ng-model="customer.firstName" required>
+                    </p>
+                    <p>
+                        <label>Last Name:</label>
+                        <input class="r" type="text" ng-model="customer.surname" required>
+                    </p>
+                    <p>
+                        <label>Email</label>
+                        <input class="r" type="email" ng-model="customer.emailAddress" required>
+                    </p>
+                    <p>
+                        <label>Address:</label>
+                        <input class="r" type="text" ng-model="customer.shippingAddress" required>
+                    </p>
+                    <p>
+                        <label>Credit Card:</label>
+                        <input class="r" type="text" ng-model="customer.creditCardDetails" required>
+                    </p>
+                    <p>
+                        <label>Password:</label>
+                        <input class="r" type="text" ng-model="customer.password" required>
+                    </p>
+                </fieldset>
+                <button type="submit">Create Account</button>  
+            </form>
+        <footer>
+            <p>
+                This website is not a real hotel. This page is only to fulfill the requirements for an assignment only.
+            </p>
+        </footer>
+        </body>
+</html>

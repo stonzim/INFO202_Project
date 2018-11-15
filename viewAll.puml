@@ -1,0 +1,40 @@
+@startuml
+skinparam style strictuml
+
+actor "User" as user
+participant "products.html" as web <<webpage>>
+participant "AngularProductsController" as ctrl <<controller>>
+participant "JoobyProductModule" as mod <<module>>
+participant "productsDAO" as dao <<DAO>>
+database "Database" as db
+
+web++
+
+user -> web : clicks 'All'
+
+note over ctrl: .query() is actually being done\non the productDAO from\na factory, but that is injected\nfrom our jooby web service
+web -> ctrl++ : prodCtrl.selectAll()
+
+ctrl -> mod++ : productDAO.query()
+
+mod -> dao++ : « create »
+
+dao -> db++ : dao.getList()
+
+dao <-- db-- : resultSet
+
+dao -> dao : extract product details\nfrom ResultSet into variables
+
+mod <-- dao : product collection
+
+mod -> mod : turn product objects into json
+
+ctrl <-- mod : json
+
+web <-- ctrl : json
+
+web -> web : product details put into table
+
+user <-- web   : all products displayed
+
+@enduml

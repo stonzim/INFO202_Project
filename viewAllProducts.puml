@@ -1,0 +1,35 @@
+@startuml
+skinparam style strictuml
+
+actor "User" as user
+participant "MainMenu" as menu <<frame>>
+menu++
+
+user -> menu : clicks 'View Products'
+create "ShowProducts" as dialog <<dialog>>
+menu -> dialog : construct
+
+dialog++
+
+create "ListProducts" as dao <<DAO>>
+dialog -> dao++ : construct
+
+create "SimpleListModel" as listmodel <<Model>>
+dialog -> listmodel++ : construct
+
+dialog--
+
+dao -> dao : get current product list
+listmodel -> dialog++ : update products
+
+dao -> dao : get current category list
+listmodel -> dialog : update categories
+listmodel--
+dao--
+
+user -> dialog : clicks 'Close' button
+dialog -> dialog : dispose()
+
+destroy dialog
+@enduml
+
